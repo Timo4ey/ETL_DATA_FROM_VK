@@ -16,3 +16,7 @@ check:
 
 lint:
 	poetry run flake8 etl_data_from_vk
+
+
+install:
+	poetry install

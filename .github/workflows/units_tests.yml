@@ -1,0 +1,29 @@
+name: Test and Test's Covarage
+on:
+    - push
+    - pull_request
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                python-version: [3.11]
+        steps:
+
+            - name: Git clone
+              uses: actions/checkout@v3
+            - name: Setup Python ${{ matrix.python-version }}
+              uses: actions/setup-python@v4
+              with:
+                python-version: ${{ matrix.python-version }}
+            - name: Install Dependencies
+              run: |
+                pip install poetry
+                make install
+            - name: Linter Flake8
+              run: |
+                make lint
+            - name: Tests
+              run: |
+                make check
