@@ -10,7 +10,7 @@ jobs:
             matrix:
                 python-version: [3.11]
         steps:
-
+            
             - name: Git clone
               uses: actions/checkout@v3
             - name: Setup Python ${{ matrix.python-version }}
@@ -27,3 +27,13 @@ jobs:
             - name: Tests
               run: |
                 make check
+            - name: Test & publish code coverage
+              uses: paambaati/codeclimate-action@v4.0.0
+              if: github.ref_name == 'master'
+              env:
+                  CC_TEST_REPORTER_ID: ${{ secrets.TEST_COVERAGE }}
+              with:
+                  CoverageCommand: make tests-coverage
+                  debug: true
+    
+        
