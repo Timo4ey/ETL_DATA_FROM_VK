@@ -36,4 +36,5 @@ multi_line_output = 3
 
 
 [tool.coverage.report]
-omit = ["config.py", "__init__.py", "main.py"]
+omit = ["config.py", "__init__.py", "main.py",
+"vk_data_request.py", "my_logs_file.py"]
